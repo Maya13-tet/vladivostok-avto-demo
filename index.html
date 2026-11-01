@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Курс на Восток · авто из Азии во Владивосток (демо)</title>
+<meta name="description" content="Демо-проект: лендинг компании по привозу автомобилей из Кореи, Японии и Китая во Владивосток. Каждую сделку ведут сами владельцы.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Курс на Восток">
+<meta property="og:title" content="Авто из Азии: каждую сделку ведут сами владельцы">
+<meta property="og:description" content="Корея, Япония, Китай. Вы познакомитесь с нами до договора, а не после оплаты. Демо-проект.">
+<meta property="og:image" content="assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="noindex">
+<link rel="preload" as="image" href="assets/hero-m.webp" media="(max-width: 860px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/hero.webp" media="(min-width: 861px)" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@600;800&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%230c1820%27/%3E%3Cpath d=%27M16 5l9 11-9 11-9-11z%27 fill=%27%23f2b441%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="vibe.css">
+<style>
+  /* ---- тема: шесть цветов, два шрифта ---------------------------------- */
+  .v-page {
+    --v-canvas: #0c1820; --v-surface: #14262f;
+    --v-ink: #eef3f4; --v-ink-soft: #9db0b8;
+    --v-accent: #f2b441; --v-accent-ink: #1a1204;
+    --v-font-display: "Geologica", "Arial", system-ui, sans-serif;
+    --v-font-text: "Onest", "Segoe UI", system-ui, sans-serif;
+    --v-shadow-color: 3 8 12;
+    --v-radius: 10px;
+    --v-display-weight: 800;
+    --v-track-tight: -0.02em;
+    --v-canvas-85: color-mix(in oklab, var(--v-canvas) 85%, transparent);
+    --v-canvas-60: color-mix(in oklab, var(--v-canvas) 60%, transparent);
+    --v-accent-25: color-mix(in oklab, var(--v-accent) 25%, transparent);
+  }
+  html, body { background: #0c1820; }
+  .v-page .v-lede { font-weight: 400; }
+  .v-page .v-label { font-weight: 500; }
+  .v-page .v-btn { font-size: var(--v-t-base); font-weight: 600; }
+  .v-page h3 { font-weight: 600; }
+  .v-page a { color: inherit; }
+  /* заголовки и подводки по центру (договорённость с Майей) */
+  .c { text-align: center; margin-inline: auto; }
+
+  /* ---- метка демо и шапка ----------------------------------------------- */
+  .demo-label { position: fixed; inset: 0 0 auto 0; z-index: 60; height: 32px; display: flex; align-items: center; justify-content: center;
+    background: #f2b441; color: #1a1204; font: 600 .78rem/1 "Onest", "Segoe UI", system-ui, sans-serif; letter-spacing: .02em; text-align: center; padding-inline: .75rem; }
+  .bar { position: fixed; inset: 32px 0 auto 0; z-index: 30; display: flex; align-items: center; justify-content: space-between;
+    padding: var(--v-3) var(--v-gutter); gap: var(--v-4);
+    background: linear-gradient(to bottom, var(--v-canvas-85), transparent);
+    transition: background-color .3s var(--v-ease-out), box-shadow .3s var(--v-ease-out); }
+  .bar.is-scrolled { background: var(--v-canvas-85); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 1px 0 var(--v-hair); }
+  .bar__mark { font-family: var(--v-font-display); font-weight: 800; font-size: var(--v-t-lg); letter-spacing: -.01em; text-decoration: none;
+    display: inline-flex; align-items: center; gap: .55em; min-height: 44px; white-space: nowrap; }
+  .bar__mark i { width: .62em; height: .62em; background: var(--v-accent); transform: rotate(45deg); display: inline-block; border-radius: 2px; }
+  .bar__right { display: flex; align-items: center; gap: var(--v-4); }
+  .bar__tel { text-decoration: none; font-weight: 600; font-size: var(--v-t-sm); display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--v-2); }
+  @media (max-width: 700px) {
+    .bar__tel { display: none; }
+    .bar .v-btn { padding: 0 1em; min-height: 44px; font-size: .9rem; }
+    .bar__mark { font-size: 1.05rem; }
+  }
+  @media (max-width: 860px) { .bar.is-scrolled { background: color-mix(in oklab, var(--v-canvas) 96%, transparent); } }
+  @media (max-width: 860px) {
+    .hero__tel, .own__text, .rows p, .terms dd, .rt__steps small, .city__cap, .close__meta, .foot { font-size: .95rem; }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .bar__tel:hover, .hero__tel:hover b { color: var(--v-accent); }
+  }
+
+  /* ---- 1 · hero: бухта вечером, текст по центру в небе ---------------- */
+  .hero__back img { position: absolute; max-width: none; width: 112%; height: 112%; left: -6%; top: -4%; object-fit: cover; object-position: 50% 80%; }
+  .hero__floor { position: absolute; inset: auto 0 0 0; height: 30%; z-index: 2; pointer-events: none;
+    background: linear-gradient(to top, var(--v-canvas) 0%, var(--v-canvas-60) 40%, transparent 100%); }
+  .hero__sky { position: absolute; inset: 0 0 38% 0; z-index: 2; pointer-events: none;
+    background: linear-gradient(to bottom, rgb(5 12 18 / .55) 0%, rgb(5 12 18 / .3) 60%, transparent 100%); }
+  .hero__copy { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; text-align: center;
+    padding: clamp(7rem, 20vh, 11rem) var(--v-gutter) 0; }
+  .hero__copy .v-display { font-size: clamp(2.3rem, 1rem + 3.9vw, 5rem); line-height: 1; max-width: 17ch; }
+  .hero__copy .v-lede { margin: var(--v-5) auto 0; max-width: 36ch; opacity: .94; }
+  .hero__cta { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--v-3) var(--v-6); margin-top: var(--v-6); }
+  .hero__tel { text-decoration: none; font-size: var(--v-t-sm); display: inline-flex; align-items: center; min-height: 44px; gap: .35em; }
+  .hero__tel b { font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
+  @media (max-width: 860px) {
+    .hero__back img { width: 100%; height: 100%; left: 0; top: 0; object-position: 50% 100%; }
+    .hero__copy { padding-top: 7.6rem; }
+    .hero__copy .v-display { font-size: clamp(2rem, 9.2vw, 2.7rem); }
+    .hero__copy .v-lede { font-size: var(--v-t-base); margin-top: var(--v-4); }
+    .hero__cta { margin-top: var(--v-5); }
+    .hero__sky { inset: 0 0 30% 0; }
+  }
+
+  /* ---- 2 · кому вы отдаёте деньги ------------------------------------- */
+  .poka__head { max-width: 44rem; display: grid; gap: var(--v-4); margin-bottom: var(--v-7); }
+  .rows { max-width: 46rem; margin-inline: auto; }
+  .rows li { padding: var(--v-5) 0; border-top: 1px solid var(--v-hair); display: grid; gap: var(--v-1); }
+  .rows li:last-child { border-bottom: 1px solid var(--v-hair); }
+  .rows p { color: var(--v-ink-soft); max-width: 52ch; }
+  .turn { max-width: 40rem; margin: var(--v-8) auto 0; text-align: center; display: grid; gap: var(--v-3); }
+  .turn__text { font-family: var(--v-font-display); font-weight: 600; font-size: var(--v-t-xl); line-height: 1.2; text-wrap: balance; }
+  .turn__text b { color: var(--v-accent); font-weight: 600; }
+
+  /* ---- 3 · владельцы: два голоса поверх одной фотографии --------------- */
+  .own__back img { position: absolute; max-width: none; width: 108%; height: 108%; left: -4%; top: -4%; object-fit: cover; object-position: 70% 50%; }
+  .own__scrim { position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: linear-gradient(to right, rgb(5 12 18 / .72) 0%, rgb(5 12 18 / .5) 30%, transparent 58%); }
+  .own__col { position: absolute; z-index: 3; left: var(--v-gutter); top: 0; bottom: 0; width: min(38vw, 32rem); display: grid; align-items: center; }
+  .own__col > * { grid-area: 1 / 1; text-align: center; display: grid; gap: var(--v-3); justify-items: center; }
+  .own__text { color: var(--v-ink); opacity: .92; max-width: 34ch; text-wrap: pretty; }
+  .own__col .v-display { font-size: clamp(1.8rem, 1rem + 2.1vw, 3.1rem); line-height: 1.04; }
+  @media (max-width: 860px) {
+    .own__back img { width: 100%; height: 100%; left: 0; top: 0; object-position: 50% 100%; }
+    .own__scrim { background: linear-gradient(to bottom, rgb(5 12 18 / .78) 0%, rgb(5 12 18 / .5) 34%, transparent 58%); }
+    .own__col { left: var(--v-gutter); right: var(--v-gutter); width: auto; top: 7.2rem; bottom: auto; align-items: start; }
+    .own__col .v-display { font-size: clamp(1.7rem, 7.4vw, 2.2rem); }
+  }
+
+  /* ---- 4 · что вы получаете -------------------------------------------- */
+  .terms { max-width: 54rem; margin: var(--v-7) auto 0; }
+  .terms > div { display: grid; grid-template-columns: 1fr 1.25fr; gap: var(--v-6); padding: var(--v-5) 0; border-top: 1px solid var(--v-hair); align-items: baseline; }
+  .terms > div:last-child { border-bottom: 1px solid var(--v-hair); }
+  .terms dt { font-family: var(--v-font-display); font-weight: 600; font-size: var(--v-t-lg); line-height: 1.15; }
+  .terms dd { color: var(--v-ink-soft); max-width: 46ch; }
+  .terms__cta { display: flex; justify-content: center; margin-top: var(--v-7); }
+  @media (max-width: 700px) { .terms > div { grid-template-columns: 1fr; gap: var(--v-2); } }
+
+  /* ---- 5 · путь машины: маршрут рисуется от прокрутки ------------------- */
+  .rt { position: absolute; inset: 0; z-index: 3; padding: clamp(6.5rem, 14vh, 8.5rem) var(--v-gutter) var(--v-6);
+    display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: var(--v-8); align-items: center; max-width: 82rem; margin-inline: auto; }
+  .rt__head { text-align: center; margin-bottom: var(--v-6); display: grid; gap: var(--v-3); justify-items: center; }
+  .rt__head .v-display { font-size: clamp(1.7rem, 1rem + 1.9vw, 2.8rem); max-width: 16ch; }
+  .rt__steps { counter-reset: s; display: grid; gap: 0; list-style: none; padding: 0; margin: 0; }
+  .rt__steps li { counter-increment: s; position: relative; padding: var(--v-3) 0 var(--v-3) 3.1rem; border-top: 1px solid var(--v-hair);
+    opacity: calc(.32 + .68 * min(1, max(0, (var(--v-p) - var(--s)) * 14))); }
+  .rt__steps li:last-child { border-bottom: 1px solid var(--v-hair); }
+  .rt__steps li::before { content: counter(s); position: absolute; left: 0; top: .72rem; width: 2rem; height: 2rem; border-radius: 50%;
+    display: grid; place-items: center; font: 600 .9rem/1 var(--v-font-display); color: var(--v-accent-ink); background: var(--v-accent); }
+  .rt__steps b { display: block; font-family: var(--v-font-display); font-weight: 600; font-size: var(--v-t-lg); line-height: 1.15; }
+  .rt__steps small { display: block; color: var(--v-ink-soft); font-size: var(--v-t-sm); margin-top: .15rem; }
+  .rt__map { width: 100%; height: auto; max-height: 62svh; display: block; overflow: visible; }
+  .rt__sea { fill: color-mix(in oklab, var(--v-surface) 70%, transparent); stroke: var(--v-hair); }
+  .rt__grid { stroke: var(--v-hair); stroke-width: 1; fill: none; stroke-dasharray: 2 7; }
+  .rt__base { fill: none; stroke: var(--v-hair-strong); stroke-width: 1.6; stroke-dasharray: 3 7; stroke-linecap: round; }
+  .rt__path { fill: none; stroke: var(--v-accent); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; vector-effect: non-scaling-stroke;
+    stroke-dashoffset: calc(1 - min(1, max(0, (var(--v-p) - var(--a)) * var(--k)))); }
+  .rt__dot { fill: var(--v-canvas); stroke: var(--v-ink); stroke-width: 2; }
+  .rt__name { fill: var(--v-ink); font: 600 15px var(--v-font-text); }
+  .rt__sub { fill: var(--v-ink-soft); font: 400 12.5px var(--v-font-text); }
+  .rt__sea-name { fill: var(--v-ink-soft); font: italic 400 13px var(--v-font-text); opacity: .7; }
+  .rt__vl { opacity: calc(min(1, max(0, (var(--v-p) - .52) * 9))); }
+  .rt__vl circle.core { fill: var(--v-accent); }
+  .rt__vl circle.ring { fill: none; stroke: var(--v-accent); stroke-width: 2; opacity: .5; }
+  @media (max-width: 860px) {
+    .rt { grid-template-columns: 1fr; gap: var(--v-3); padding-top: 7rem; align-content: start; }
+    .rt__head { margin-bottom: 0; }
+    .rt__head .v-label { display: none; }
+    .rt__map { max-height: 27svh; order: -1; margin-top: 0; }
+    .rt__head { order: -2; }
+    .rt__steps li { padding: .5rem 0 .5rem 2.6rem; }
+    .rt__steps li::before { top: .45rem; width: 1.7rem; height: 1.7rem; font-size: .8rem; }
+    .rt__steps b { font-size: 1rem; }
+    .rt__steps small { font-size: .85rem; }
+  }
+  @media (max-height: 700px) and (max-width: 860px) { .rt__steps small { display: none; } }
+
+  /* ---- 6 · ключи и город --------------------------------------------- */
+  .city__fig { position: relative; margin: var(--v-7) auto 0; max-width: 76rem; overflow: hidden; border-radius: var(--v-radius); box-shadow: var(--v-e2), var(--v-edge); }
+  .city__fig img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+  .city__cap { text-align: center; color: var(--v-ink-soft); margin: var(--v-4) auto 0; max-width: 56ch; }
+  .sym { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--v-6) var(--v-8); margin-top: var(--v-8); }
+  .sym li { display: grid; justify-items: center; gap: var(--v-2); width: 8.2rem; text-align: center; }
+  .sym svg { width: 100%; height: auto; max-width: 7.2rem; fill: none; stroke: var(--v-accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .sym span { font-size: var(--v-t-sm); color: var(--v-ink-soft); }
+  .sym__head { margin-top: var(--v-9); }
+
+  /* ---- 7 · финал ------------------------------------------------------- */
+  .close__back img { position: absolute; max-width: none; width: 110%; height: 110%; left: -5%; top: -5%; object-fit: cover; object-position: 80% 60%; }
+  .close__scrim { position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background: radial-gradient(70% 60% at 50% 42%, rgb(5 12 18 / .62) 0%, rgb(5 12 18 / .3) 55%, transparent 100%); }
+  .close__copy { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    padding: 4rem var(--v-gutter) 5rem; }
+  .close__copy .v-display { font-size: clamp(2rem, 1rem + 3.2vw, 4.2rem); max-width: 15ch; line-height: 1.02; }
+  .close__copy .v-lede { margin: var(--v-5) auto 0; max-width: 34ch; }
+  .close__copy .v-btn { margin-top: var(--v-6); }
+  .close__meta { margin-top: var(--v-5); font-size: var(--v-t-sm); display: grid; gap: .25rem; }
+  .close__meta a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
+  .foot { position: absolute; z-index: 3; left: 0; right: 0; bottom: var(--v-4); text-align: center; font-size: var(--v-t-xs); color: var(--v-ink-soft); padding-inline: var(--v-gutter); }
+</style>
+</head>
+<body>
+<div class="demo-label" data-demo-label>Демо-проект · учебная работа, не официальный сайт</div>
+<div class="v-page">
+  <span data-v-progress></span>
+  <div class="v-grain" aria-hidden="true"></div>
+
+  <header class="bar">
+    <a class="bar__mark" href="#top"><i aria-hidden="true"></i>Курс на Восток</a>
+    <nav class="bar__right" aria-label="Быстрые ссылки">
+      <a class="bar__tel" href="tel:+74230000000">+7 (423) 000-00-00</a>
+      <a class="v-btn" href="https://t.me/" rel="noopener">Написать владельцам</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- 1 · УЗНАВАНИЕ: бухта Золотой Рог вечером, оффер по центру неба -->
+    <section id="top" data-v-act="pin" data-v-span="2.0" data-v-drift="#0c1820" aria-label="Авто из Азии во Владивосток">
+      <div data-v-stage>
+        <div class="v-layer hero__back" data-v-parallax="-0.6">
+          <picture>
+            <source media="(max-width: 860px)" srcset="assets/hero-m.webp">
+            <img src="assets/hero.webp" alt="Вечерняя бухта Золотой Рог во Владивостоке и вантовый мост над водой" width="1920" height="1080" fetchpriority="high">
+          </picture>
+        </div>
+        <div class="hero__sky" aria-hidden="true"></div>
+        <div class="hero__floor" aria-hidden="true"></div>
+
+        <div class="hero__copy" data-v-cue="0 0.82 0">
+          <h1 class="v-display v-display--xl" data-v-kinetic="lines">Авто из Азии: каждую сделку ведут сами владельцы</h1>
+          <p class="v-lede">Корея, Япония, Китай. Вы познакомитесь с нами до договора, а не после оплаты.</p>
+          <div class="hero__cta">
+            <a class="v-btn" href="https://t.me/" rel="noopener" data-v-magnet="0.2" data-v-rise="0">Написать владельцам</a>
+            <a class="hero__tel" href="tel:+74230000000">или позвоните <b>+7 (423) 000-00-00</b></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · ЦЕНА БЕЗДЕЙСТВИЯ и ПОВОРОТ -->
+    <section class="v-section v-section--tight" data-v-act="flow" data-v-drift="#0f1e27" id="poka" aria-label="Кому вы отдаёте деньги">
+      <div class="v-wrap">
+        <div class="poka__head c" data-v-in data-v-stagger="70">
+          <span class="v-label">Пока вы выбираете, как привезти машину</span>
+          <h2 class="v-display v-display--lg">Кому вы отдаёте деньги за машину, которую ещё не видели?</h2>
+        </div>
+        <ul class="rows" data-v-in data-v-stagger="80">
+          <li><h3>Посредник в переписке</h3><p>Вы знаете только ник и аватарку. Если что-то пойдёт не так, найти человека будет негде.</p></li>
+          <li><h3>Менеджеры меняются</h3><p>Сегодня вам отвечает один, завтра другой, и каждый заново спрашивает, что вы хотели.</p></li>
+          <li><h3>«Всё сложно, но мы разберёмся»</h3><p>Вопрос про сроки и таможню, а в ответ общие слова. Что с вашими деньгами, непонятно.</p></li>
+        </ul>
+        <div class="turn" data-v-in data-v-in-self>
+          <span class="v-label">Поэтому</span>
+          <p class="turn__text">Здесь за сделку отвечают <b>два человека – владельцы</b>. Их лица, имена и телефоны видны ниже, до всякого договора.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · ВЛАДЕЛЬЦЫ: два голоса, одна фотография -->
+    <section id="owners" data-v-act="pin" data-v-span="2.6" data-v-drift="#0a141b" aria-label="Владельцы компании">
+      <div data-v-stage>
+        <div class="v-layer own__back" data-v-parallax="-0.5">
+          <picture>
+            <source media="(max-width: 860px)" srcset="assets/owners-m.webp">
+            <img src="assets/owners.webp" alt="Два владельца компании стоят у машины на набережной Владивостока" width="1920" height="1080" loading="lazy" decoding="async">
+          </picture>
+        </div>
+        <div class="own__scrim" aria-hidden="true"></div>
+        <div class="own__col">
+          <div data-v-cue="0 0.46 0.06">
+            <span class="v-label">Подбор и осмотр</span>
+            <h2 class="v-display v-display--md">Алексей ищет и проверяет вашу машину</h2>
+            <p class="own__text">Выбирает варианты у проверенных поставщиков, смотрит авто сам и присылает вам фото и видео до оплаты.</p>
+          </div>
+          <div data-v-cue="0.52 1 0.06 0">
+            <span class="v-label">Документы и расчёты</span>
+            <h2 class="v-display v-display--md">Марина отвечает за бумаги и деньги</h2>
+            <p class="own__text">Договор до оплаты, таможня, постановка на учёт. Объясняет каждый шаг простыми словами.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · ЧТО ВЫ ПОЛУЧАЕТЕ -->
+    <section class="v-section v-section--tight" data-v-act="flow" data-v-drift="#0f1e27" id="usloviya" aria-label="Что вы получаете">
+      <div class="v-wrap">
+        <div class="c" data-v-in data-v-stagger="70" style="max-width:44rem">
+          <h2 class="v-display v-display--lg">Что вы получаете до, во время и после покупки</h2>
+        </div>
+        <dl class="terms" data-v-in data-v-stagger="80">
+          <div><dt>Договор до оплаты</dt><dd>Что покупаем, за сколько и в какие сроки – всё на бумаге, до первого платежа.</dd></div>
+          <div><dt>Осмотр с фото и видео</dt><dd>Вы видите машину глазами владельца раньше, чем вносите деньги.</dd></div>
+          <div><dt>Один телефон на всю сделку</dt><dd>Звоните владельцам напрямую. Без очереди менеджеров и без «перезвоним».</dd></div>
+          <div><dt>Помощь после ключей</dt><dd>Поможем с постановкой на учёт и ответим на вопросы, когда машина уже у вас.</dd></div>
+        </dl>
+        <div class="terms__cta" data-v-in><a class="v-btn" href="https://t.me/" rel="noopener">Написать владельцам</a></div>
+      </div>
+    </section>
+
+    <!-- 5 · ПУТЬ МАШИНЫ: фирменный ход, маршрут рисуется от прокрутки -->
+    <section id="put" data-v-act="pin" data-v-span="3.0" data-v-drift="#0a141b" aria-label="Путь машины из Азии во Владивосток">
+      <div data-v-stage>
+        <div class="rt">
+          <div>
+            <div class="rt__head">
+              <span class="v-label">Путь машины</span>
+              <h2 class="v-display v-display--md">Из Азии во Владивосток за пять шагов</h2>
+            </div>
+            <ol class="rt__steps">
+              <li style="--s:.06"><b>Подбор</b><small>Выбираем машину вместе с вами</small></li>
+              <li style="--s:.22"><b>Осмотр и выкуп</b><small>Фото, видео, договор, оплата</small></li>
+              <li style="--s:.38"><b>Море</b><small>Машина идёт в порт Владивостока</small></li>
+              <li style="--s:.56"><b>Таможня</b><small>Растаможка и документы</small></li>
+              <li style="--s:.74"><b>Ключи</b><small>Встреча во Владивостоке</small></li>
+            </ol>
+          </div>
+          <svg class="rt__map" viewBox="0 0 640 420" role="img" aria-label="Схема маршрута: из Китая, Кореи и Японии во Владивосток">
+            <rect class="rt__sea" x="1" y="1" width="638" height="418" rx="14"/>
+            <path class="rt__grid" d="M0 105H640M0 210H640M0 315H640M160 0V420M320 0V420M480 0V420"/>
+            <text class="rt__sea-name" x="338" y="318">Японское море</text>
+            <!-- слабые базовые линии -->
+            <path class="rt__base" d="M80 200C200 190 330 140 470 120"/>
+            <path class="rt__base" d="M270 340C300 260 400 190 470 120"/>
+            <path class="rt__base" d="M560 350C580 260 540 180 470 120"/>
+            <!-- маршруты, рисуются от прокрутки -->
+            <path class="rt__path" pathLength="1" style="--a:.10;--k:2.2" d="M80 200C200 190 330 140 470 120"/>
+            <path class="rt__path" pathLength="1" style="--a:.16;--k:2.2" d="M270 340C300 260 400 190 470 120"/>
+            <path class="rt__path" pathLength="1" style="--a:.22;--k:2.2" d="M560 350C580 260 540 180 470 120"/>
+            <g>
+              <circle class="rt__dot" cx="80" cy="200" r="6"/>
+              <text class="rt__name" x="80" y="176" text-anchor="middle">Китай</text>
+              <circle class="rt__dot" cx="270" cy="340" r="6"/>
+              <text class="rt__name" x="270" y="368" text-anchor="middle">Корея</text>
+              <circle class="rt__dot" cx="560" cy="350" r="6"/>
+              <text class="rt__name" x="560" y="378" text-anchor="middle">Япония</text>
+            </g>
+            <g class="rt__vl">
+              <circle class="ring" cx="470" cy="120" r="20"/>
+              <circle class="core" cx="470" cy="120" r="9"/>
+              <text class="rt__name" x="470" y="86" text-anchor="middle">Владивосток</text>
+              <text class="rt__sub" x="470" y="70" text-anchor="middle">порт и ключи</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · КЛЮЧИ И ГОРОД -->
+    <section class="v-section v-section--tight" data-v-act="flow" data-v-drift="#0f1e27" id="klyuchi" aria-label="Ключи во Владивостоке">
+      <div class="v-wrap">
+        <div class="c" data-v-in data-v-stagger="70" style="max-width:44rem">
+          <h2 class="v-display v-display--lg">Ключи – в руки, в вашем городе</h2>
+          <p class="v-body v-soft c" style="margin-top:var(--v-4)">Принимаем машину вместе: смотрим на месте, подписываем бумаги и фотографируем на память.</p>
+        </div>
+        <figure class="city__fig" data-v-reveal="left" data-v-reveal-at="0.12 0.5">
+          <img src="assets/keys.webp" alt="Владелец передаёт ключи от новой машины покупателю на улице Владивостока" width="1600" height="900" loading="lazy" decoding="async">
+        </figure>
+        <p class="city__cap">Знакомый город, знакомые лица, ваша машина.</p>
+
+        <div class="c sym__head" data-v-in><span class="v-label">Город, где мы живём и работаем</span></div>
+        <ul class="sym" data-v-in data-v-stagger="80">
+          <li>
+            <svg viewBox="0 0 120 70" aria-hidden="true"><path d="M4 56H116M30 56V10M90 56V10M30 14L8 56M30 14L52 56M30 22L16 56M30 22L44 56M90 14L68 56M90 14L112 56M90 22L76 56M90 22L104 56M30 14L90 14"/></svg>
+            <span>Золотой мост</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 120 70" aria-hidden="true"><path d="M4 58H116M34 58L44 6L54 58M66 58L76 6L86 58M44 6L10 58M44 6L58 58M44 6L26 58M76 6L110 58M76 6L62 58M76 6L94 58M44 6L76 6"/></svg>
+            <span>Русский мост</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 120 70" aria-hidden="true"><path d="M30 64H90M38 64L44 24H76L82 64M44 24L48 14H72L76 24M52 14V8H68V14M60 8V2M40 44H80M14 20L34 28M106 20L86 28M12 36L32 36M108 36L88 36"/></svg>
+            <span>Токаревский маяк</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 120 70" aria-hidden="true"><path d="M6 64L112 14M6 70L112 20M44 44L72 32L80 50L52 62Z M52 48L68 41M30 58L34 66M86 40L90 48"/></svg>
+            <span>Фуникулёр</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 7 · ДЕЙСТВИЕ: маяк на закате, одна кнопка -->
+    <section id="final" data-v-act="pin" data-v-span="1.8" data-v-drift="#0c1820" aria-label="Связаться с владельцами">
+      <div data-v-stage>
+        <div class="v-layer close__back" data-v-parallax="-0.5">
+          <img src="assets/mayak.webp" alt="Токаревский маяк на закате над морем" width="1920" height="1080" loading="lazy" decoding="async">
+        </div>
+        <div class="close__scrim" aria-hidden="true"></div>
+        <div class="close__copy" data-v-cue="0.12">
+          <h2 class="v-display v-display--lg">Давайте познакомимся до договора</h2>
+          <p class="v-lede">Напишите владельцам: ответят лично, без менеджеров и скриптов.</p>
+          <a class="v-btn" href="https://t.me/" rel="noopener" data-v-magnet="0.2" data-v-rise="0">Написать владельцам</a>
+          <div class="close__meta">
+            <a href="tel:+74230000000">+7 (423) 000-00-00</a>
+            <span class="v-soft">Курс на Восток · Владивосток</span>
+          </div>
+        </div>
+        <p class="foot">Демо-проект: имена, телефон, ссылки и фото условные и будут заменены данными заказчика.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="vibe.js"></script>
+<script>
+  // На телефоне пины короче и реплики держатся дольше: правим атрибуты до монтирования.
+  if (window.matchMedia('(max-width: 860px)').matches) {
+    document.getElementById('top').setAttribute('data-v-span', '1.7');
+    document.querySelector('#top .hero__copy').setAttribute('data-v-cue', '0 1 0 0');
+    document.getElementById('owners').setAttribute('data-v-span', '2.4');
+    document.getElementById('put').setAttribute('data-v-span', '2.8');
+  }
+  Vibe.mount(document.querySelector('.v-page'));
+
+  // Шапка: подложка после 40 px прокрутки.
+  (function () {
+    var bar = document.querySelector('.bar'), on = null;
+    function tick() { var s = window.scrollY > 40; if (s !== on) { on = s; bar.classList.toggle('is-scrolled', s); } }
+    window.addEventListener('scroll', tick, { passive: true }); tick();
+  })();
+</script>
+</body>
+</html>
